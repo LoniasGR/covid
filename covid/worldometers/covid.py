@@ -100,7 +100,7 @@ class Covid:
             raise ValueError(
                 f"There is no country called '{country_name}', to check available country names use `list_countries()`"
             )
-        return CovidModel(**country_data).dict()
+        return CovidModel(**country_data).model_dump()
 
     def list_countries(self) -> list:
         return list(self.__data.keys())
