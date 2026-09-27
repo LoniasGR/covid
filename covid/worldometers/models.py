@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-""" Covid coronavirus statistics based on John Hopkins University statistics
+"""Covid coronavirus statistics based on John Hopkins University statistics"""
 
-"""
 from decimal import Decimal
+from typing import Union
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field, field_validator
 class CovidModel(BaseModel):
     """Dataclass acts as a Model for Covid data"""
 
-    country: str | int = Field(..., alias="Country,Other")
+    country: Union[str, int] = Field(..., alias="Country,Other")
     total_cases: int = Field(0, alias="TotalCases")
     confirmed: int = Field(0, alias="TotalCases")
     new_cases: int = Field(0, alias="NewCases")
