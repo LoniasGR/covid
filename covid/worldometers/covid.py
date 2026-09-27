@@ -58,7 +58,9 @@ class Covid:
         Returns:
             list: output formatted list
         """
-        _list = [val.strip().replace(",", "") for val in _list]
+        _list = [
+            val.strip().replace(",", "").replace("+", "") for val in _list
+        ]
         return [val if val and val != "N/A" else 0 for val in _list]
 
     def get_data(self) -> list:
@@ -68,8 +70,11 @@ class Covid:
             list: List of country data
         """
         return [
-            CovidModel(**dict(zip(self.__headers, self.__format(val)))).dict()
+            CovidModel(
+                **dict(zip(self.__headers, self.__format(val)))
+            ).model_dump()
             for val in self.__data.values()
+            if val[0] != ""
         ]
 
     def get_status_by_country_name(self, country_name: str) -> dict:
@@ -95,7 +100,7 @@ class Covid:
             raise ValueError(
                 f"There is no country called '{country_name}', to check available country names use `list_countries()`"
             )
-        return CovidModel(**country_data).dict()
+        return CovidModel(**country_data).model_dump()
 
     def list_countries(self) -> list:
         return list(self.__data.keys())
