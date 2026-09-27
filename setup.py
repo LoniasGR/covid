@@ -48,5 +48,5 @@ setup(
     ],
     entry_points={"console_scripts": ["covid=covid.cli:app"]},
     zip_safe=False,
-    python_requires=">=3.8",
+    python_requires=">=3.7",
 )
